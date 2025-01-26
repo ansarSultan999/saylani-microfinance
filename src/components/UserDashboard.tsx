@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './UserDashboard.css'; // Import the CSS file for styling
 
 interface LoanRequest {
   id: string;
