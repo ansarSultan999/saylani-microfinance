@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './UserRegistration.css'; // Import the CSS file for styling
 
 const UserRegistration: React.FC = () => {
   const [cnic, setCnic] = useState<string>('');
@@ -8,45 +8,43 @@ const UserRegistration: React.FC = () => {
   const [name, setName] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    try {
-      const response = await axios.post('/api/register', { cnic, email, name });
-      if (response.data.success) {
-        alert('Registration successful. Please check your email for the password.');
-        navigate('/login');
-      }
-    } catch (error) {
-      console.error('Registration failed:', error);
-      alert('Registration failed. Please try again.');
-    }
+    alert(`Registration successful for ${name} with CNIC: ${cnic} and Email: ${email}`);
+    navigate('/login'); // Redirect to login page
   };
 
   return (
     <div className="user-registration">
       <h2>User Registration</h2>
       <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          value={cnic} 
-          onChange={(e) => setCnic(e.target.value)}
-          placeholder="CNIC"
-          required
-        />
-        <input 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input 
-          type="text" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          required
-        />
+        <div className="form-group">
+          <input 
+            type="text" 
+            value={cnic} 
+            onChange={(e) => setCnic(e.target.value)}
+            placeholder="CNIC"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input 
+            type="text" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            required
+          />
+        </div>
         <button type="submit">Register</button>
       </form>
     </div>
