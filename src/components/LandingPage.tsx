@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import './LandingPage.css'; // Import the CSS file for styling
 
